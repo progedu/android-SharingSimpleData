@@ -1,6 +1,7 @@
 package com.example.sharingsimpledata;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,7 +23,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendBinary(View view) {
-
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_STREAM,
+                Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.image_1));
+        shareIntent.setType("image/jpeg");
+        startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.send_to)));
     }
 
     public void sendMultiple(View view) {
