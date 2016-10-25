@@ -2,8 +2,12 @@ package com.example.sharingsimpledata;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ShareActionProvider;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,6 +39,21 @@ public class MainActivity extends AppCompatActivity {
         } else {
             // Handle other intents, such as being started from the home screen
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.share_menu, menu);
+        MenuItem shareItem = menu.findItem(R.id.action_share);
+        ShareActionProvider myShareActionProvider =
+                (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "Shared Massage Sample");
+        shareIntent.setType("text/plain");
+        myShareActionProvider.setShareIntent(shareIntent);
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     void handleSendText(Intent intent) {

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SharingSimpleData</string>
     <string name="send_to">送り先を選んでください</string>
+    <string name="share">共有する</string>
 </resources>
