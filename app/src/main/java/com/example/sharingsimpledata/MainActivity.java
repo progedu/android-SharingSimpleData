@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -32,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendMultiple(View view) {
-
+        ArrayList<Uri> imageUris = new ArrayList<Uri>();
+        imageUris.add(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.image_1));
+        imageUris.add(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.image_2));
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
+        shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, imageUris);
+        shareIntent.setType("image/*");
+        startActivity(Intent.createChooser(shareIntent, "Share images to.."));
     }
 }
